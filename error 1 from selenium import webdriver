@@ -1,4 +1,39 @@
-# Contributor Covenant Code of Conduct
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+import time
+import random
+
+# مسیر ChromeDriver را مشخص کن
+CHROME_DRIVER_PATH = "chromedriver.exe"  # اگر در همان پوشه است، همین بماند
+
+# تنظیمات مرورگر کروم
+chrome_options = Options()
+chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+# راه‌اندازی مرورگر
+service = Service(CHROME_DRIVER_PATH)
+driver = webdriver.Chrome(service=service, options=chrome_options)
+
+# آدرس سایت ایران ویزا
+url = "https://evisatraveller.mfa.ir/fa/request/applyrequest/"
+
+while True:
+    try:
+        driver.get(url)
+        time.sleep(random.uniform(5, 10))  # تأخیر تصادفی
+
+        print("✅ صفحه بررسی شد، منتظر دور بعدی...")
+        time.sleep(random.uniform(30, 120))  # تأخیر بین درخواست‌ها
+
+    except Exception as e:
+        print(f"⚠️ خطا رخ داد: {e}")
+        time.sleep(60)
+
+# در صورت نیاز مرورگر را ببند
+# driver.quit()# Contributor Covenant Code of Conduct
 
 ## Our Pledge
 
